@@ -19,7 +19,7 @@ const Footer = () => {
               <ShieldCheck size={20} /> OMAR_SUNNY
             </div>
             <div className="text-gray-500 dark:text-gray-400 font-mono text-xs tracking-widest">
-              © {currentYear} SYSTEM_ADMIN. ALL_RIGHTS_RESERVED.
+              © {currentYear} SYSTEM_ADMIN. ALL RIGHTS RESERVED.
             </div>
           </div>
           
