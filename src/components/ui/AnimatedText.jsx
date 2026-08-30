@@ -32,10 +32,10 @@ const animations = {
     transition: { duration: 0.5 },
   },
   written: {
-    initial: { width: 0, opacity: 0 },
-    animate: { width: '100%', opacity: 1 },
-    exit: { width: 0, opacity: 0 },
-    transition: { duration: 1, ease: 'easeInOut' },
+    initial: { clipPath: 'inset(0 100% 0 0)' },
+    animate: { clipPath: 'inset(0 0% 0 0)' },
+    exit: { clipPath: 'inset(0 100% 0 0)' },
+    transition: { ease: 'linear' },
   },
 }
 
@@ -46,7 +46,12 @@ const AnimatedText = ({
   containerClassName = '',
   tag: Tag = 'h1',
 }) => {
-  const { type = 'fade', duration = 0.6, zoom = 1, rotationDuration = 3 } = settings
+  // Try mapping both 'type' and 'animation' in case admin uses 'animation'
+  const animType = settings.type || settings.animation || 'fade'
+  const duration = settings.duration || 0.6
+  const zoom = settings.zoom || 1
+  const rotationDuration = settings.rotationDuration || 3
+  
   const [index, setIndex] = useState(0)
 
   const texts = useMemo(() => (Array.isArray(text) ? text : [text]), [text])
@@ -67,9 +72,8 @@ const AnimatedText = ({
     }
   }, [contentKey, rotationDuration, texts.length])
 
-  const anim = animations[type] || animations.fade
+  const anim = animations[animType] || animations.fade
 
-  // Use containerClassName to enforce a fixed height if needed
   return (
     <div className={`inline-block ${containerClassName}`} style={{ transform: `scale(${zoom})` }}>
       <Tag className={className}>
@@ -80,7 +84,11 @@ const AnimatedText = ({
             animate={anim.animate}
             exit={anim.exit}
             transition={{ ...anim.transition, duration: duration }}
-            style={{ display: 'inline-block' }}
+            style={{ 
+              display: 'inline-block',
+              whiteSpace: animType === 'written' ? 'nowrap' : 'normal',
+              overflow: animType === 'written' ? 'hidden' : 'visible'
+            }}
           >
             {currentText}
           </motion.span>
