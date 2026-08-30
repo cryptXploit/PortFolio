@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Github, ExternalLink, FolderGit2, Cpu, ShieldCheck } from 'lucide-react'
 import { useProjects } from '../../hooks/useProjects'
@@ -14,6 +14,7 @@ const Projects = () => {
   const { data: profile } = useProfile()
   const [filter, setFilter] = useState('all')
   const [activeVideo, setActiveVideo] = useState(null)
+  const navigate = useNavigate()
 
   const sectionAnim = profile?.textAnimations?.sectionHeading || { animation: 'slide', duration: 0.6, zoom: 1 }
 
@@ -87,10 +88,11 @@ const Projects = () => {
               <Card 
                 key={project.id} 
                 index={idx} 
-                className="group flex flex-col h-full border-t-4 border-t-cyber-matrix"
+                className="group flex flex-col h-full border-t-4 border-t-cyber-matrix cursor-pointer"
                 onMouseEnter={() => setActiveVideo(project.id)}
+                onClick={() => navigate(`/project/${project.slug}`)}
               >
-                <Link to={`/project/${project.slug}`} className="flex flex-col h-full">
+                <div className="flex flex-col h-full">
                   
                   {/* Media Container with Overlay */}
                   <div className="relative overflow-hidden aspect-video">
@@ -144,7 +146,7 @@ const Projects = () => {
                       )}
                     </div>
                   </div>
-                </Link>
+                </div>
               </Card>
             ))}
           </AnimatePresence>
