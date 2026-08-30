@@ -99,13 +99,26 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
-          <AnimatedText
-            text={profile?.bio || 'Building secure AI systems and robust web architectures.'}
-            settings={bioAnim}
-            tag="p"
-            className="text-lg text-gray-800 dark:text-gray-300 max-w-2xl mx-auto mb-10 font-sans"
-          />
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.6, delay: 0.3 }}
+          whileHover={{ scale: 1.02, y: -2 }}
+          className="relative max-w-3xl mx-auto mb-10 group cursor-default"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-indigo-500/10 to-purple-500/0 dark:from-cyber-neon/0 dark:via-cyber-neon/10 dark:to-cyber-matrix/0 rounded-xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+          
+          <div className="relative bg-white/40 dark:bg-[#050914]/60 backdrop-blur-md border border-gray-200/80 dark:border-cyber-neon/30 px-6 py-4 md:px-10 md:py-6 rounded-2xl shadow-lg hover:shadow-[0_0_25px_rgba(0,242,254,0.15)] transition-all duration-500 overflow-hidden">
+            <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-indigo-500 dark:border-cyber-neon rounded-tl-2xl opacity-50 group-hover:opacity-100 group-hover:w-6 group-hover:h-6 transition-all duration-300"></div>
+            <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-indigo-500 dark:border-cyber-neon rounded-br-2xl opacity-50 group-hover:opacity-100 group-hover:w-6 group-hover:h-6 transition-all duration-300"></div>
+            
+            <AnimatedText
+              text={profile?.bio || 'Building secure AI systems and robust web architectures.'}
+              settings={bioAnim}
+              tag="p"
+              className="text-lg md:text-xl text-gray-900 dark:text-gray-100 font-sans leading-relaxed tracking-wide relative z-10"
+            />
+          </div>
         </motion.div>
 
         <motion.div
