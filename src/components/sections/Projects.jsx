@@ -13,6 +13,7 @@ const Projects = () => {
   const { data: projects, isLoading, error } = useProjects()
   const { data: profile } = useProfile()
   const [filter, setFilter] = useState('all')
+  const [activeVideo, setActiveVideo] = useState(null)
 
   const sectionAnim = profile?.textAnimations?.sectionHeading || { animation: 'slide', duration: 0.6, zoom: 1 }
 
@@ -83,7 +84,12 @@ const Projects = () => {
         <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           <AnimatePresence>
             {filteredProjects?.map((project, idx) => (
-              <Card key={project.id} index={idx} className="group flex flex-col h-full border-t-4 border-t-cyber-matrix">
+              <Card 
+                key={project.id} 
+                index={idx} 
+                className="group flex flex-col h-full border-t-4 border-t-cyber-matrix"
+                onMouseEnter={() => setActiveVideo(project.id)}
+              >
                 <Link to={`/project/${project.slug}`} className="flex flex-col h-full">
                   
                   {/* Media Container with Overlay */}
@@ -95,6 +101,7 @@ const Projects = () => {
                       duration={project.carousel_duration || 3}
                       animation={project.carousel_animation || 'fade'}
                       autoPlay={true}
+                      autoPlayVideo={activeVideo === project.id || (activeVideo === null && idx === 0)}
                     />
                     {/* Top right badge */}
                     <div className="absolute top-3 right-3 z-20 bg-black/60 backdrop-blur-md border border-cyber-matrix/50 px-2 py-1 rounded flex items-center gap-1 text-xs text-cyber-matrix font-mono">

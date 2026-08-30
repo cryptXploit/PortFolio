@@ -23,7 +23,7 @@ const animations = {
   },
 }
 
-const MediaCarousel = ({ mediaUrls, mediaTypes, duration = 3, animation = 'fade', autoPlay = true }) => {
+const MediaCarousel = ({ mediaUrls, mediaTypes, duration = 3, animation = 'fade', autoPlay = true, autoPlayVideo = true }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const MediaCarousel = ({ mediaUrls, mediaTypes, duration = 3, animation = 'fade'
                 if (ytId) {
                   return (
                     <iframe
-                      src={`https://www.youtube.com/embed/${ytId}?autoplay=${autoPlay ? 1 : 0}&mute=1&loop=1&playlist=${ytId}`}
+                      src={`https://www.youtube.com/embed/${ytId}?autoplay=${autoPlayVideo ? 1 : 0}&mute=1&loop=1&playlist=${ytId}`}
                       title="YouTube video player"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -75,7 +75,7 @@ const MediaCarousel = ({ mediaUrls, mediaTypes, duration = 3, animation = 'fade'
                   )
                 }
                 
-                return <video src={currentMedia} controls={!autoPlay} autoPlay={autoPlay} muted loop playsInline className="w-full h-full object-cover" />
+                return <video src={currentMedia} controls={!autoPlayVideo} autoPlay={autoPlayVideo} muted loop playsInline className="w-full h-full object-cover" />
               })()
             )}
           </motion.div>
