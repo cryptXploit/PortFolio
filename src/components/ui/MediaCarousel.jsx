@@ -54,7 +54,29 @@ const MediaCarousel = ({ mediaUrls, mediaTypes, duration = 3, animation = 'fade'
             {currentType === 'image' ? (
               <img src={currentMedia} alt="Project media" className="w-full h-full object-cover" />
             ) : (
-              <video src={currentMedia} controls className="w-full h-full object-cover" />
+              (() => {
+                const getYoutubeId = (url) => {
+                  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
+                  const match = url.match(regExp)
+                  return match && match[2].length === 11 ? match[2] : null
+                }
+                const ytId = getYoutubeId(currentMedia)
+                
+                if (ytId) {
+                  return (
+                    <iframe
+                      src={`https://www.youtube.com/embed/${ytId}?autoplay=${autoPlay ? 1 : 0}&mute=1&loop=1&playlist=${ytId}`}
+                      title="YouTube video player"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full object-cover pointer-events-auto"
+                    ></iframe>
+                  )
+                }
+                
+                return <video src={currentMedia} controls={!autoPlay} autoPlay={autoPlay} muted loop playsInline className="w-full h-full object-cover" />
+              })()
             )}
           </motion.div>
         </AnimatePresence>
