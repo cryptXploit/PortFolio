@@ -74,6 +74,49 @@ const AnimatedText = ({
 
   const anim = animations[animType] || animations.fade
 
+  if (animType === 'written') {
+    return (
+      <div className={`inline-block ${containerClassName}`} style={{ transform: `scale(${zoom})` }}>
+        <Tag className={className}>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={currentText}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={{
+                visible: { transition: { staggerChildren: duration / currentText.length } },
+                hidden: {},
+                exit: { opacity: 0, transition: { duration: 0.2 } }
+              }}
+              style={{ display: 'inline-block', whiteSpace: 'nowrap' }}
+            >
+              {currentText.split('').map((char, i) => (
+                <motion.span
+                  key={i}
+                  variants={{
+                    hidden: { opacity: 0, display: 'none' },
+                    visible: { opacity: 1, display: 'inline-block' }
+                  }}
+                >
+                  {char === ' ' ? '\u00A0' : char}
+                </motion.span>
+              ))}
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
+                style={{ display: 'inline-block', marginLeft: '2px', fontWeight: '300' }}
+                className="text-cyber-neon"
+              >
+                |
+              </motion.span>
+            </motion.span>
+          </AnimatePresence>
+        </Tag>
+      </div>
+    )
+  }
+
   return (
     <div className={`inline-block ${containerClassName}`} style={{ transform: `scale(${zoom})` }}>
       <Tag className={className}>
@@ -86,8 +129,6 @@ const AnimatedText = ({
             transition={{ ...anim.transition, duration: duration }}
             style={{ 
               display: 'inline-block',
-              whiteSpace: animType === 'written' ? 'nowrap' : 'normal',
-              overflow: animType === 'written' ? 'hidden' : 'visible'
             }}
           >
             {currentText}

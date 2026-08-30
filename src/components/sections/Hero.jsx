@@ -96,7 +96,6 @@ const Hero = () => {
               className="text-xl md:text-2xl text-cyber-neon font-mono"
               containerClassName="h-8 md:h-8 flex items-center" 
             />
-            <span className="w-2 h-6 bg-cyber-neon animate-pulse ml-1"></span>
           </div>
         </motion.div>
 
