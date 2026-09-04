@@ -52,7 +52,19 @@ const MediaCarousel = ({ mediaUrls, mediaTypes, duration = 3, animation = 'fade'
             className="w-full h-full"
           >
             {currentType === 'image' ? (
-              <img src={currentMedia} alt="Project media" className="w-full h-full object-cover" />
+              <div 
+                className="w-full h-full relative select-none"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+              >
+                <div className="absolute inset-0 z-10 bg-transparent" aria-hidden="true" />
+                <img 
+                  src={currentMedia} 
+                  alt="Project media" 
+                  draggable="false"
+                  className="w-full h-full object-cover pointer-events-none" 
+                />
+              </div>
             ) : (
               (() => {
                 const getYoutubeId = (url) => {

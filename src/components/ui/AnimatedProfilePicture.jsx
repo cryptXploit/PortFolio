@@ -121,13 +121,22 @@ const AnimatedProfilePicture = ({ pictures = [], settings = {} }) => {
   if (!picture) return null
 
   return (
-    <div className="relative inline-block" style={{ transform: `scale(${zoom})`, transition: 'transform 0.3s ease' }}>
+    <div 
+      className="relative inline-block select-none" 
+      style={{ transform: `scale(${zoom})`, transition: 'transform 0.3s ease' }}
+      onContextMenu={(e) => e.preventDefault()}
+      onDragStart={(e) => e.preventDefault()}
+    >
+      {/* Security Overlay */}
+      <div className="absolute inset-0 z-10 bg-transparent rounded-full" aria-hidden="true" />
+      
       <AnimatePresence mode="wait">
         <motion.img
           key={picture}
           src={picture}
           alt="Profile"
-          className="w-32 h-32 md:w-40 md:h-35 rounded-full object-cover border-4 border-indigo-500 shadow-lg"
+          draggable="false"
+          className="w-32 h-32 md:w-40 md:h-35 rounded-full object-cover border-4 border-indigo-500 shadow-lg pointer-events-none"
           initial={anim.initial}
           animate={anim.animate}
           exit={anim.exit}

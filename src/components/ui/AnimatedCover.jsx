@@ -114,7 +114,12 @@ const AnimatedCover = ({ pictures = [], settings = {}, overlay = true }) => {
   if (!picture) return null
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden" style={{ transform: `scale(${zoom})` }}>
+    <div 
+      className="absolute inset-0 z-0 overflow-hidden select-none" 
+      style={{ transform: `scale(${zoom})` }}
+      onContextMenu={(e) => e.preventDefault()}
+      onDragStart={(e) => e.preventDefault()}
+    >
       <AnimatePresence mode="wait">
         <motion.div
           key={picture}
@@ -124,10 +129,20 @@ const AnimatedCover = ({ pictures = [], settings = {}, overlay = true }) => {
           exit={anim.exit}
           transition={{ ...anim.transition, delay }}
         >
-          <img src={picture} alt="Cover" className="w-full h-full object-cover" />
+          <img 
+            src={picture} 
+            alt="Cover" 
+            draggable="false"
+            className="w-full h-full object-cover pointer-events-none" 
+          />
         </motion.div>
       </AnimatePresence>
-      {overlay && <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />}
+      
+      {/* Security Overlay / Darken Overlay */}
+      {overlay && <div className="absolute inset-0 bg-black/30 dark:bg-black/50 z-10 pointer-events-none" />}
+      
+      {/* Invisible layer to catch right clicks specifically without affecting layout */}
+      <div className="absolute inset-0 z-20 bg-transparent" aria-hidden="true" />
     </div>
   )
 }
