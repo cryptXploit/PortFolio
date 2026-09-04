@@ -6,6 +6,7 @@ import TestimonialManagement from '../components/admin/TestimonialManagement'
 import ProjectForm from '../components/admin/ProjectForm'
 import MediaUpload from '../components/admin/MediaUpload'
 import AboutSettings from '../components/admin/AboutSettings'
+import ContactManagement from '../components/admin/ContactManagement'
 import { Terminal, ShieldAlert, LogOut, CheckCircle2, Lock, KeyRound } from 'lucide-react'
 import { motion } from 'framer-motion'
 
@@ -66,6 +67,7 @@ const Admin = () => {
     { id: 'projects', label: 'PROJECT_DB' },
     { id: 'skills', label: 'SKILL_NODES' },
     { id: 'testimonials', label: 'CLIENT_LOGS' },
+    { id: 'messages', label: 'INBOX_LOGS' },
     { id: 'media', label: 'MEDIA_ASSETS' },
     { id: 'about', label: 'DOSSIER_DATA' },
   ]
@@ -125,6 +127,7 @@ const Admin = () => {
           {activeTab === 'projects' && <ProjectForm />}
           {activeTab === 'skills' && <SkillManagement />}
           {activeTab === 'testimonials' && <TestimonialManagement />}
+          {activeTab === 'messages' && <ContactManagement />}
           {activeTab === 'about' && <AboutSettings />}
           {activeTab === 'media' && <MediaUpload />}
         </motion.div>
