@@ -42,7 +42,7 @@ const Testimonials = () => {
               text="Client_Feedback_Logs"
               settings={sectionAnim}
               tag="h2"
-              className="text-4xl md:text-5xl font-bold font-mono text-center text-white uppercase tracking-tighter"
+              className="text-3xl md:text-5xl font-bold font-mono text-center text-white uppercase tracking-tighter"
             />
           </div>
         </AnimatedSection>

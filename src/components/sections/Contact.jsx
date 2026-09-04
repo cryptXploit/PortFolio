@@ -37,7 +37,7 @@ const Contact = () => {
               text="Secure_Comm_Channel"
               settings={sectionAnim}
               tag="h2"
-              className="text-4xl md:text-5xl font-bold font-mono text-center text-gray-900 dark:text-white uppercase tracking-tighter"
+              className="text-3xl md:text-5xl font-bold font-mono text-center text-gray-900 dark:text-white uppercase tracking-tighter"
             />
           </div>
         </AnimatedSection>
