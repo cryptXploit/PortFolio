@@ -7,7 +7,6 @@ export const useSubmitContact = () => {
       const { data, error } = await supabase
         .from('contacts')
         .insert([formData])
-        .select()
       if (error) throw error
       return data
     },
