@@ -56,7 +56,8 @@ const AnimatedText = ({
 
   const texts = useMemo(() => (Array.isArray(text) ? text : [text]), [text])
   const contentKey = useMemo(() => texts.join('|'), [texts])
-  const currentText = texts[index]
+  const rawText = texts[index]
+  const currentText = (rawText === undefined || rawText === null || rawText === '') ? ' ' : rawText
 
   const intervalRef = useRef(null)
 

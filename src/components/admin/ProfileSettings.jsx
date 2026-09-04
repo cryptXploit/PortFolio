@@ -440,7 +440,7 @@ const ProfileSettings = () => {
             rows="3"
             value={formData.textAnimations?.role?.texts?.join('\n') || ''}
             onChange={(e) => {
-              const lines = e.target.value.split('\n').filter(l => l.trim())
+              const lines = e.target.value.split('\n')
               setFormData(prev => ({
                 ...prev,
                 textAnimations: {
