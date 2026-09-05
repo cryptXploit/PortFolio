@@ -61,9 +61,34 @@ const Testimonials = () => {
 
                 <Quote className="text-cyber-matrix/20 absolute top-6 right-6" size={60} />
                 
-                <p className="text-gray-600 dark:text-gray-300 mb-8 relative z-10 font-sans leading-relaxed flex-grow italic">
+                <p className="text-gray-600 dark:text-gray-300 mb-6 relative z-10 font-sans leading-relaxed flex-grow italic">
                   "{t.content}"
                 </p>
+
+                {/* Optional Trust Metrics */}
+                {(t.resolution_text || t.impact_metrics || t.rating) && (
+                  <div className="mb-6 bg-black/50 border border-cyber-matrix/20 rounded-lg p-4 font-mono text-xs space-y-2">
+                    {t.rating && (
+                      <div className="flex items-center gap-2">
+                        <span className="text-gray-500">GRADE:</span>
+                        <span className="text-yellow-500">{t.rating}</span>
+                      </div>
+                    )}
+                    {t.impact_metrics && (
+                      <div className="flex items-center gap-2">
+                        <span className="text-gray-500">IMPACT:</span>
+                        <span className="text-cyber-neon">{t.impact_metrics}</span>
+                      </div>
+                    )}
+                    {t.resolution_text && (
+                      <div className="mt-2 pt-2 border-t border-cyber-matrix/20 text-green-400">
+                        <span className="text-gray-500 block mb-1">SYS_RESOLUTION_LOG:</span>
+                        <span className="leading-relaxed whitespace-pre-wrap">{t.resolution_text}</span>
+                        {t.timeline_date && <span className="block mt-1 text-gray-600">DATE: {t.timeline_date}</span>}
+                      </div>
+                    )}
+                  </div>
+                )}
                 
                 <div className="flex items-center gap-4 border-t border-gray-200 dark:border-cyber-matrix/20 pt-6 mt-auto">
                   <div className="relative">
@@ -77,8 +102,18 @@ const Testimonials = () => {
                     )}
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 dark:text-white tracking-wide">{t.name}</h4>
-                    <p className="text-xs font-mono text-cyber-matrix">{t.role}</p>
+                    <h4 className="font-bold text-gray-900 dark:text-white tracking-wide flex items-center gap-2">
+                      {t.name}
+                      {t.is_verified && (
+                        <span className="inline-flex items-center justify-center w-4 h-4 bg-green-500/20 text-green-500 border border-green-500/50 rounded-full" title="Verified Client">
+                          ✓
+                        </span>
+                      )}
+                    </h4>
+                    <p className="text-xs font-mono text-cyber-matrix">
+                      {t.role} 
+                      {t.project_reference && <span className="text-gray-500 ml-1">| {t.project_reference}</span>}
+                    </p>
                   </div>
                 </div>
               </motion.div>
